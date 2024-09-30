@@ -17,6 +17,12 @@ UGameStateManagerComponent::UGameStateManagerComponent()
 	// ...
 }
 
+void UGameStateManagerComponent::BeginPlay()
+{
+	Super::BeginPlay();
+	AttemptStateTransition(m_InitialStateClass);
+}
+
 UStateObject* UGameStateManagerComponent::GetStateObjectUnsafe(TSubclassOf<UStateObject> StateClass) const
 {
 	return m_StateMap.FindRef(StateClass);

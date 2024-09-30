@@ -20,6 +20,8 @@ public:
 	// Sets default values for this component's properties
 	UGameStateManagerComponent();
 
+	virtual void BeginPlay() override;
+
 	UFUNCTION(BlueprintAuthorityOnly, BlueprintNativeEvent, BlueprintCallable, Category="Game State Management")
 	bool AttemptStateTransition(TSubclassOf<UStateObject> StateClass);
 
@@ -44,5 +46,9 @@ protected:
 	TMap<TSubclassOf<UStateObject>, TObjectPtr<UStateObject>> m_StateMap;
 
 	TObjectPtr<UStateObject> m_ActiveState = nullptr;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, DisplayName="Initial State Class")
+	TSubclassOf<UStateObject> m_InitialStateClass = nullptr;
+	
 
 };
