@@ -21,6 +21,7 @@ public:
 	UGameStateManagerComponent();
 
 	virtual void BeginPlay() override;
+	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintAuthorityOnly, BlueprintNativeEvent, BlueprintCallable, Category="Game State Management")
 	bool AttemptStateTransition(TSubclassOf<UStateObject> StateClass);

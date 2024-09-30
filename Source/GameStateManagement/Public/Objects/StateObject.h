@@ -28,6 +28,9 @@ public:
 	void UpdateState();
 
 	UFUNCTION(BlueprintAuthorityOnly, BlueprintNativeEvent, BlueprintCallable)
+	void TickState(float DeltaTime);
+	
+	UFUNCTION(BlueprintAuthorityOnly, BlueprintNativeEvent, BlueprintCallable)
 	void ExitState(bool bDeferExit);
 
 	UPROPERTY(BlueprintAssignable)

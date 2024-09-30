@@ -12,7 +12,7 @@ UGameStateManagerComponent::UGameStateManagerComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
-	PrimaryComponentTick.bCanEverTick = false;
+	PrimaryComponentTick.bCanEverTick = true;
 
 	// ...
 }
@@ -21,6 +21,16 @@ void UGameStateManagerComponent::BeginPlay()
 {
 	Super::BeginPlay();
 	AttemptStateTransition(m_InitialStateClass);
+}
+
+void UGameStateManagerComponent::TickComponent(float DeltaTime, ELevelTick TickType,
+	FActorComponentTickFunction* ThisTickFunction)
+{
+	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+	if(IsValid(m_ActiveState))
+	{
+		m_ActiveState->TickState(DeltaTime);
+	}
 }
 
 UStateObject* UGameStateManagerComponent::GetStateObjectUnsafe(TSubclassOf<UStateObject> StateClass) const

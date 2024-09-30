@@ -58,3 +58,8 @@ void UStateObject::StateUpdated_Implementation(int Index)
 	PostStateUpdated.Broadcast(this);
 	OnStateUpdated.Broadcast();
 }
+
+void UStateObject::TickState_Implementation(float DeltaTime)
+{
+	// UE_LOG(LogTemp, Display, TEXT("State [%s] Ticked"), *GetNameSafe(this));
+}

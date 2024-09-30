@@ -11,7 +11,7 @@ public class StateManagementEditor : ModuleRules
 			"Core", "CoreUObject", "Engine", "UnrealEd", "BlueprintGraph", "KismetCompiler", "GameStateManagement"
 		});
  
-		PublicIncludePaths.AddRange(new string[] {"StateManagementEditor/Public"});
-		PrivateIncludePaths.AddRange(new string[] {"StateManagementEditor/Private"});
+		// PublicIncludePaths.AddRange(new string[] {"StateManagementEditor/Public"});
+		// PrivateIncludePaths.AddRange(new string[] {"StateManagementEditor/Private"});
 	}
 }
