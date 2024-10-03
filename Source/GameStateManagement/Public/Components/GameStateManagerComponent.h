@@ -26,6 +26,12 @@ public:
 	UFUNCTION(BlueprintAuthorityOnly, BlueprintNativeEvent, BlueprintCallable, Category="Game State Management")
 	bool AttemptStateTransition(TSubclassOf<UStateObject> StateClass);
 
+	UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, Category="Game State Management")
+	void PinActiveState(TSubclassOf<UStateObject> StateClass);
+
+	UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, Category="Game State Management")
+	void UnpinActiveState();
+	
 	UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(DeterminesOutputType="StateClass"))
 	UStateObject* GetStateObject(TSubclassOf<UStateObject> StateClass, bool bCreateIfNotPresent = true); 
 
@@ -55,4 +61,7 @@ protected:
 	TSubclassOf<UStateObject> m_InitialStateClass = nullptr;
 	
 
+	bool bActiveStatePinned = false;
+	TSubclassOf<UStateObject> m_PinnedStateClass = nullptr;
+	
 };

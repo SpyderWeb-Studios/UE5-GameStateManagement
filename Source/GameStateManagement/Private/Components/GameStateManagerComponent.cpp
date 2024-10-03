@@ -33,6 +33,33 @@ void UGameStateManagerComponent::TickComponent(float DeltaTime, ELevelTick TickT
 	}
 }
 
+void UGameStateManagerComponent::PinActiveState(TSubclassOf<UStateObject> StateClass)
+{
+	// If the state class is specified, then we should check if the active state is the same as the specified state class
+	// If the state class is not specified, then we should check if the active state is valid
+	if(
+		(IsValid(StateClass) && IsValid(m_ActiveState) && m_ActiveState->GetClass() == StateClass) ||
+		(IsValid(m_ActiveState)))
+	{
+		UE_LOG(LogTemp, Display, TEXT("Game State Manager: Pinning Active State"));
+		bActiveStatePinned = true;
+	}
+}
+
+void UGameStateManagerComponent::UnpinActiveState()
+{
+	if(bActiveStatePinned)
+	{
+		UE_LOG(LogTemp, Display, TEXT("Game State Manager: Unpinning Active State"));
+		bActiveStatePinned = false;
+	}
+	if(IsValid(m_PinnedStateClass))
+	{
+		AttemptStateTransition(m_PinnedStateClass);
+		m_PinnedStateClass = nullptr;
+	}
+}
+
 UStateObject* UGameStateManagerComponent::GetStateObjectUnsafe(TSubclassOf<UStateObject> StateClass) const
 {
 	return m_StateMap.FindRef(StateClass);
@@ -84,6 +111,13 @@ bool UGameStateManagerComponent::AttemptStateTransition_Implementation(TSubclass
 	if(!IsValid(StateClass))
 	{
 		UE_LOG(LogTemp, Error, TEXT("Game State Manager: Cannot Transition to Invalid State Class"));
+		return false;
+	}
+
+	if(bActiveStatePinned)
+	{
+		UE_LOG(LogTemp, Display, TEXT("Game State Manager: Active State is Pinned, Cannot Transition"));
+		m_PinnedStateClass = StateClass;
 		return false;
 	}
 	
