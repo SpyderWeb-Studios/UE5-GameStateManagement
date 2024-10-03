@@ -34,6 +34,9 @@ public:
 	
 	UFUNCTION(BlueprintAuthorityOnly, BlueprintPure)
 	UStateObject* GetActiveStateObject() const { return m_ActiveState; }
+
+	UFUNCTION(BlueprintPure)
+	bool IsStateActive(TSubclassOf<UStateObject> StateClass) const;
 	
 	UPROPERTY(BlueprintAssignable, DisplayName="On State Transition")
 	FOnStateTransition OnStateTransition;

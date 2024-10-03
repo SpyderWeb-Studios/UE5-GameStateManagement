@@ -38,6 +38,11 @@ UStateObject* UGameStateManagerComponent::GetStateObjectUnsafe(TSubclassOf<UStat
 	return m_StateMap.FindRef(StateClass);
 }
 
+bool UGameStateManagerComponent::IsStateActive(TSubclassOf<UStateObject> StateClass) const
+{
+	return IsValid(m_ActiveState) && m_ActiveState->GetClass() == StateClass;
+}
+
 bool UGameStateManagerComponent::AddStateToManager(const TSubclassOf<UStateObject> StateClass)
 {
 	if(IsValid(StateClass))
