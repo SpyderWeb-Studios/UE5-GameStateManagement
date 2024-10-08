@@ -40,3 +40,5 @@ FText UK2Node_AttemptStateTransition::GetMenuCategory() const
 {
 	return LOCTEXT("AttemptTransition", "Game State Management");
 }
+
+#undef LOCTEXT_NAMESPACE
