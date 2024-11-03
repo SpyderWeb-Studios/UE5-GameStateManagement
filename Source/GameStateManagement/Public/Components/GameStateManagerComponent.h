@@ -14,6 +14,7 @@ class GAMESTATEMANAGEMENT_API UGameStateManagerComponent : public UActorComponen
 	GENERATED_BODY()
 
 	DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnStateTransition, UStateObject*, NewState);
+	DECLARE_DYNAMIC_MULTICAST_DELEGATE_FourParams(FOnStateTransitionEvent, UStateObject*, NewState, UStateObject*, CurrentState, TSubclassOf<UStateObject>, NewStateClass, TSubclassOf<UStateObject>, CurrentStateClass);
 	
 
 public:	
@@ -46,6 +47,9 @@ public:
 	
 	UPROPERTY(BlueprintAssignable, DisplayName="On State Transition")
 	FOnStateTransition OnStateTransition;
+
+	UPROPERTY(BlueprintAssignable, DisplayName="On State Transition Event")
+	FOnStateTransitionEvent OnStateTransitionEvent;
 	
 protected:
 

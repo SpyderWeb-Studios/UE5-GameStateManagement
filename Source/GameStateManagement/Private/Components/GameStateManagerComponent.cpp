@@ -134,6 +134,7 @@ bool UGameStateManagerComponent::AttemptStateTransition_Implementation(TSubclass
 	{
 		m_ActiveState = StateObject;
 		OnStateTransition.Broadcast(StateObject);
+		OnStateTransitionEvent.Broadcast(StateObject, m_ActiveState, StateClass, m_ActiveState->GetClass());
 	}
 	return bSuccess;
 }
