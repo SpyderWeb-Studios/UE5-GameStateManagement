@@ -31,7 +31,7 @@ public:
 	void PinActiveState(TSubclassOf<UStateObject> StateClass);
 
 	UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, Category="Game State Management")
-	void UnpinActiveState();
+	void UnpinActiveState(TSubclassOf<UStateObject> StateClass);
 	
 	UFUNCTION(BlueprintAuthorityOnly, BlueprintCallable, meta=(DeterminesOutputType="StateClass"))
 	UStateObject* GetStateObject(TSubclassOf<UStateObject> StateClass, bool bCreateIfNotPresent = true); 

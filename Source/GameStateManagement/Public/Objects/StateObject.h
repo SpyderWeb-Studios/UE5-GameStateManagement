@@ -61,6 +61,8 @@ public:
 	UPROPERTY(BlueprintAssignable)
 	FOnStateEvent OnStateExited;
 
+	UPROPERTY(BlueprintAssignable)
+	FOnStateEvent OnStateExitAttempted;
 	
 protected:
 	UFUNCTION(BlueprintAuthorityOnly, BlueprintNativeEvent, BlueprintCallable)

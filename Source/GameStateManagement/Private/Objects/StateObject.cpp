@@ -30,7 +30,7 @@ void UStateObject::UpdateState_Implementation()
 
 void UStateObject::ExitState_Implementation(bool bDeferExit)
 {
-UE_LOG(LogTemp, Display, TEXT("Exiting State [%s]"), *GetNameSafe(this));
+	UE_LOG(LogTemp, Display, TEXT("Exiting State [%s]"), *GetNameSafe(this));
 	PreStateExited.Broadcast(this);
 	if(!bDeferExit)
 	{

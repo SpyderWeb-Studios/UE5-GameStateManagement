@@ -46,11 +46,16 @@ void UGameStateManagerComponent::PinActiveState(TSubclassOf<UStateObject> StateC
 	}
 }
 
-void UGameStateManagerComponent::UnpinActiveState()
+void UGameStateManagerComponent::UnpinActiveState(TSubclassOf<UStateObject> StateClass)
 {
-	if(bActiveStatePinned)
+	if(bActiveStatePinned && IsValid(StateClass) && m_ActiveState->GetClass() == StateClass)
 	{
-		UE_LOG(LogTemp, Display, TEXT("Game State Manager: Unpinning Active State"));
+		UE_LOG(LogTemp, Display, TEXT("Game State Manager: Unpinning Active State, Class Specified: [%s]"), *GetNameSafe(StateClass));
+		bActiveStatePinned = false;
+	}
+	if(!IsValid(StateClass))
+	{
+		UE_LOG(LogTemp, Error, TEXT("Game State Manager: Unpinning Active State"));
 		bActiveStatePinned = false;
 	}
 	if(IsValid(m_PinnedStateClass))
@@ -118,6 +123,7 @@ bool UGameStateManagerComponent::AttemptStateTransition_Implementation(TSubclass
 	{
 		UE_LOG(LogTemp, Display, TEXT("Game State Manager: Active State is Pinned, Cannot Transition"));
 		m_PinnedStateClass = StateClass;
+		m_ActiveState->OnStateExitAttempted.Broadcast();
 		return false;
 	}
 	
